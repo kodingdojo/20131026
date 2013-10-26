@@ -5,6 +5,8 @@ class TestFreqTableGenerator < Minitest::Test
   	if str.length == 2
   		if str == 'aa'
   			{'a' => 2}
+  		elsif str == 'bb'
+  			{'b' => 2}
   		end
   	else
 	  	if str == 'a'
@@ -26,6 +28,7 @@ class TestFreqTableGenerator < Minitest::Test
   	# string with two duplicate chars => dictionary
   	# with one key (the char) with value of 2
   	assert_equal({'a' => 2}, gen('aa'))
+  	assert_equal({'b' => 2}, gen('bb'))
   end
 
 end
