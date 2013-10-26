@@ -2,7 +2,11 @@ require "minitest/autorun"
 
 class TestProbTableGenerator < Minitest::Test
   def gen(str)
-  	{"a" => 1}
+  	if str == 'a'
+  		{"a" => 1}
+  	else
+  		{"b" => 1}
+  	end
   end
 
   def test_single_char
