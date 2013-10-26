@@ -96,5 +96,6 @@ class TestTreeNode < Minitest::Test
 
     assert_equal(node_1, aParentNode.right)
     assert_equal(node_2, aParentNode.left)
+    assert_equal(10, aParentNode.freq)
   end
 end
