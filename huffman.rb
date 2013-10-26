@@ -84,6 +84,7 @@ class TestTreeNode < Minitest::Test
 
     assert_equal(node_1, aParentNode.left)
     assert_equal(node_2, aParentNode.right)
+    assert_equal(2, aParentNode.freq)
   end
 
   def test_join_two_nodes_different_keys
