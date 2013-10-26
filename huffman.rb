@@ -15,7 +15,7 @@ def gen_freq_table(str)
 end
 
 class HuffmanNode
-  attr_accessor :freq, :value, :left, :right
+  attr_accessor :freq, :value, :left, :right, :parent
 
   def initialize(freq, value)
     @freq = freq
@@ -35,9 +35,24 @@ class HuffmanNode
       parent_node.right = other_node
     end
 
+    self.parent = parent_node
+    other_node.parent = parent_node
+
     parent_node
   end
 
+  def to_bit_string
+    if @parent != nil
+      if parent.left == self
+        bit = 0
+      else
+        bit = 1
+      end
+      parent.to_bit_string + bit.to_s
+    else
+      ""
+    end
+  end
 end
 
 
@@ -66,7 +81,7 @@ class TestFreqTableGenerator < Minitest::Test
 
 end
 
-class TestTreeNode < Minitest::Test
+class TestBuildTree < Minitest::Test
   def test_create_node
     mock_node = HuffmanNode.new(freq = 1, value = 'm')
 
@@ -119,4 +134,19 @@ class TestTreeNode < Minitest::Test
     assert_equal(6, aParentNode_2.freq)
   end
 
+end
+
+class TestTraverseTree < Minitest::Test
+  def test_two_similar_leaves
+    node_1 = HuffmanNode.new(freq = 1, value = 'a')
+    node_2 = HuffmanNode.new(freq = 1, value = 'b')
+
+    parent = node_1.join_with node_2
+
+    bit_string_1 = node_1.to_bit_string
+    bit_string_2 = node_2.to_bit_string
+
+    assert_equal("0", bit_string_1)
+    assert_equal("1", bit_string_2)
+  end
 end
