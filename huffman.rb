@@ -2,6 +2,7 @@ require "minitest/autorun"
 
 def gen(str)
   freq_table = {}
+
   str.each_char do |chr|
     if freq_table[chr] == nil
       freq_table[chr] = 1
@@ -9,6 +10,7 @@ def gen(str)
       freq_table[chr] = freq_table[chr] + 1
     end
   end
+  
   freq_table
 end
 
