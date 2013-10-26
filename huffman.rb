@@ -44,11 +44,11 @@ class HuffmanNode
   def to_bit_string
     if @parent != nil
       if parent.left == self
-        bit = 0
+        bit = "0"
       else
-        bit = 1
+        bit = "1"
       end
-      parent.to_bit_string + bit.to_s
+      parent.to_bit_string + bit
     else
       ""
     end
