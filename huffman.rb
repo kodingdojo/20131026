@@ -27,9 +27,14 @@ class HuffmanNode
     parent_node = HuffmanNode
                   .new(freq = parent_freq, value = nil)
 
-    parent_node.left = self
-    parent_node.right = other_node
-    
+    if self.freq < other_node.freq
+      parent_node.left = other_node
+      parent_node.right = self
+    else
+      parent_node.left = self
+      parent_node.right = other_node
+    end
+
     parent_node
   end
 
@@ -71,7 +76,7 @@ class TestTreeNode < Minitest::Test
     assert_equal( 1, mock_node.freq)
   end
 
-  def test_append_two_child_nodes_are_equal
+  def test_join_two_nodes_equal_keys
     node_1 = HuffmanNode.new(freq = 1, value = 'a')
     node_2 = HuffmanNode.new(freq = 1, value = 'b')
 
@@ -79,5 +84,17 @@ class TestTreeNode < Minitest::Test
 
     assert_equal(node_1, aParentNode.left)
     assert_equal(node_2, aParentNode.right)
+  end
+
+  def test_join_two_nodes_different_keys
+    # In this case, node_1 should be on the right
+    # node_1 on the left since 1 < 9
+    node_1 = HuffmanNode.new(freq = 1, value = 'a')
+    node_2 = HuffmanNode.new(freq = 9, value = 'b')
+
+    aParentNode = node_1.join_with node_2
+
+    assert_equal(node_1, aParentNode.right)
+    assert_equal(node_2, aParentNode.left)
   end
 end
