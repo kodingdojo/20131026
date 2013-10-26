@@ -14,6 +14,17 @@ def gen_freq_table(str)
   freq_table
 end
 
+class TreeNode
+  attr_accessor :key, :value, :left, :right
+
+  def initialize(key, value)
+    @key = key
+    @value = value
+  end
+
+end
+
+
 class TestFreqTableGenerator < Minitest::Test
   
   def test_single_char
@@ -37,4 +48,16 @@ class TestFreqTableGenerator < Minitest::Test
     assert_equal({'a' => 1, 'b' => 1}, gen_freq_table("ab"))
   end
 
+end
+
+class TestTreeNode < Minitest::Test
+
+  def test_create_node
+    mock_node = TreeNode.new(key = 1, value = 'm')
+
+    assert_equal( nil, mock_node.left)
+    assert_equal( nil, mock_node.right)
+    assert_equal( 'm', mock_node.value)
+    assert_equal( 1, mock_node.key)
+  end
 end
