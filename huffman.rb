@@ -26,8 +26,10 @@ class HuffmanNode
     parent_freq = @freq + other_node.freq
     parent_node = HuffmanNode
                   .new(freq = parent_freq, value = nil)
+
     parent_node.left = self
     parent_node.right = other_node
+    
     parent_node
   end
 
