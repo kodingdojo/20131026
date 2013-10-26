@@ -15,11 +15,20 @@ def gen_freq_table(str)
 end
 
 class HuffmanNode
-  attr_accessor :key, :value, :left, :right
+  attr_accessor :freq, :value, :left, :right
 
-  def initialize(key, value)
-    @key = key
+  def initialize(freq, value)
+    @freq = freq
     @value = value
+  end
+
+  def join_with(other_node)
+    parent_freq = @freq + other_node.freq
+    parent_node = HuffmanNode
+                  .new(freq = parent_freq, value = nil)
+    parent_node.left = self
+    parent_node.right = other_node
+    parent_node
   end
 
 end
@@ -52,13 +61,21 @@ end
 
 class TestTreeNode < Minitest::Test
   def test_create_node
-    mock_node = HuffmanNode.new(key = 1, value = 'm')
+    mock_node = HuffmanNode.new(freq = 1, value = 'm')
 
     assert_equal( nil, mock_node.left)
     assert_equal( nil, mock_node.right)
     assert_equal( 'm', mock_node.value)
-    assert_equal( 1, mock_node.key)
+    assert_equal( 1, mock_node.freq)
   end
 
+  def test_append_two_child_nodes_are_equal
+    node_1 = HuffmanNode.new(freq = 1, value = 'a')
+    node_2 = HuffmanNode.new(freq = 1, value = 'b')
 
+    aParentNode = node_1.join_with node_2
+
+    assert_equal(node_1, aParentNode.left)
+    assert_equal(node_2, aParentNode.right)
+  end
 end
