@@ -149,4 +149,21 @@ class TestTraverseTree < Minitest::Test
     assert_equal("0", bit_string_1)
     assert_equal("1", bit_string_2)
   end
+
+  def test_three_nodes
+    node_1 = HuffmanNode.new(freq = 1, value = 'a')
+    node_2 = HuffmanNode.new(freq = 2, value = 'b')
+    node_3 = HuffmanNode.new(freq = 4, value = 'c')
+
+    aParentNode_1 = node_1.join_with node_2
+    aParentNode_2 = aParentNode_1.join_with node_3
+
+    string_1 = node_1.to_bit_string
+    string_2 = node_2.to_bit_string
+    string_3 = node_3.to_bit_string
+
+    assert_equal "0", string_3
+    assert_equal "10", string_2
+    assert_equal "11", string_1
+  end
 end
