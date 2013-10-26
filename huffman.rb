@@ -2,21 +2,15 @@ require "minitest/autorun"
 
 class TestFreqTableGenerator < Minitest::Test
   def gen(str)
-  	if str.length == 2
-  		if str == 'a'*2
-  			{'a' => 2}
-  		elsif str == 'b'*2
-  			{'b' => 2}
-  		elsif str == 'ab'
-  			{'a' => 1, 'b' => 1}
+  	freq_table = {}
+  	str.each_char do |chr|
+  		if freq_table[chr] == nil
+  			freq_table[chr] = 1
+  		else
+  			freq_table[chr] = freq_table[chr] + 1
   		end
-  	else
-	  	if str == 'a'
-	  		{"a" => 1}
-	  	else
-	  		{"b" => 1}
-	  	end
-  	end
+	end
+	freq_table
   end
 
   def test_single_char
