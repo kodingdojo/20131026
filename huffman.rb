@@ -99,4 +99,24 @@ class TestTreeNode < Minitest::Test
     assert_equal(node_2, aParentNode.left)
     assert_equal(10, aParentNode.freq)
   end
+
+  def test_join_three_nodes_different_freq
+    # In this case, node_1 should be on the right
+    # node_1 on the left since 1 < 9
+    node_1 = HuffmanNode.new(freq = 1, value = 'a')
+    node_2 = HuffmanNode.new(freq = 2, value = 'b')
+    node_3 = HuffmanNode.new(freq = 3, value = 'c')
+
+    aParentNode_1 = node_1.join_with node_2
+    aParentNode_2 = aParentNode_1.join_with node_3
+
+    assert_equal(node_1, aParentNode_1.right)
+    assert_equal(node_2, aParentNode_1.left)
+    assert_equal(3, aParentNode_1.freq)
+
+    assert_equal(node_3, aParentNode_2.right)
+    assert_equal(aParentNode_1, aParentNode_2.left)
+    assert_equal(6, aParentNode_2.freq)
+  end
+
 end
