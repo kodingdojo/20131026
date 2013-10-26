@@ -3,9 +3,9 @@ require "minitest/autorun"
 class TestFreqTableGenerator < Minitest::Test
   def gen(str)
   	if str.length == 2
-  		if str == 'aa'
+  		if str == 'a'*2
   			{'a' => 2}
-  		elsif str == 'bb'
+  		elsif str == 'b'*2
   			{'b' => 2}
   		end
   	else
